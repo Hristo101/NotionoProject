@@ -1,13 +1,9 @@
 #include "User.h"
 
-User::User(const string& userId, const string& userName, const string& password)
-{
-	if (this->checkUserId.checkUserIdIsInArray(userId))
-	{
-		throw invalid_argument("Invalid userId");
-	}
+int User::userIdCounter = 1;
 
-	this->userId = userId;
+User::User(const string& userName, const string& password) : userId(userIdCounter++)
+{
 	this->userName = userName;
 	this->password = password;
 }
