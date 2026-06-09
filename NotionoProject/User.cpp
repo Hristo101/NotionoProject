@@ -7,3 +7,13 @@ User::User(const string& userName, const string& password) : userId(userIdCounte
 	this->userName = userName;
 	this->password = password;
 }
+
+const string& User::getUserName() const
+{
+	return userName;
+}
+
+const string& User::getUserPassword() const
+{
+	return this->password;
+}
