@@ -1,4 +1,6 @@
 #include "NotinOOP.h"
+#include "User.h"   
+#include "Admin.h"  
 #include "Customer.h"
 
 void NotinOOP::registerUser(const string& username, const string& password, const string& role) {
@@ -54,3 +56,26 @@ void NotinOOP::blockUser(const string& username) {
 
     throw invalid_argument("Invalid username");
 }
+void NotinOOP::createFragrance(const string& name, const string& brand, double price, const string& fragranceFamily) {
+    for (const auto& f : fragrances) {
+        if (f.getName() == name) {
+            throw invalid_argument("This fragnance is already exist");
+            return;
+        }
+    }
+
+ 
+    this->fragrances.push_back(Fragrance(name, brand, price, fragranceFamily, 0));
+}
+void NotinOOP::addFragranceQuantity(const string& fragranceName, int quantity)
+{
+    for (auto& f : fragrances) {
+        if (f.getName() == fragranceName) {
+
+            f.setQuantity(quantity);
+        }
+    }
+
+    throw invalid_argument("Invalid fragranceName");
+}
+

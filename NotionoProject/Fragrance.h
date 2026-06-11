@@ -8,15 +8,18 @@ using namespace std;
 class Fragrance
 {
     private:
-        int fragranceId;
+        unsigned fragranceId;
+		static unsigned fragranceIdCounter;
 		string name;
 		string brand;
 		double price;
 		string fragranceFamily;
 		int quantity;
-		vector<unique_ptr<Review>> reviews;
+		vector<Review> reviews;
     public:
 		double getRating() const;
-
+		const string& getName() const;
+		void setQuantity(int qantity);
+		Fragrance(const string& name, const string& brand, double price, const string& fragranceFamily, int quantity);
 };
 

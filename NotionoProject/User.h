@@ -4,7 +4,6 @@
 #include <iostream>
 using namespace std;
 #include <exception>
-
 class NotinOOP;
 
 class User
@@ -15,8 +14,7 @@ class User
 		string userName;
 		string password;
 		weak_ptr<NotinOOP> systemRef;
-		User(const std::string& userName, const std::string& password, std::shared_ptr<NotinOOP> sys)
-			: userId(userIdCounter++), userName(userName), password(password), systemRef(sys) { }
+		User(const std::string& userName, const std::string& password, std::shared_ptr<NotinOOP> sys);
     public:
 		virtual ~User() = default;
 		virtual void help() const = 0;
