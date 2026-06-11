@@ -1,14 +1,15 @@
 #pragma once
 #include "User.h"
-class System
+class NotinOOP
 {
     private:
         vector<unique_ptr<User>> users;
 		User* currentUser;
     public:
-		~System() = default;
-		void registerUser(const string& userName, const string& password);
+		~NotinOOP() = default;
+		void registerUser(const string& userName, const string& password, const string& role);
 		void login(const string& userName, const string& password);
+		void blockUser(const string& name);
 		void logout();
 };
 

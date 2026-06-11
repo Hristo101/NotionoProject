@@ -123,20 +123,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Admin.cpp" />
     <ClCompile Include="Customer.cpp" />
     <ClCompile Include="Discount.cpp" />
     <ClCompile Include="Fragrance.cpp" />
     <ClCompile Include="NotionoProject.cpp" />
     <ClCompile Include="Review.cpp" />
-    <ClCompile Include="System.cpp" />
+    <ClCompile Include="NotinOOP.cpp" />
     <ClCompile Include="User.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Admin.h" />
     <ClInclude Include="Customer.h" />
     <ClInclude Include="Discount.h" />
     <ClInclude Include="Fragrance.h" />
     <ClInclude Include="Review.h" />
-    <ClInclude Include="System.h" />
+    <ClInclude Include="NotinOOP.h" />
     <ClInclude Include="User.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

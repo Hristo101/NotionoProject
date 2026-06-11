@@ -21,7 +21,7 @@
     <ClCompile Include="User.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="System.cpp">
+    <ClCompile Include="NotinOOP.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Customer.cpp">
@@ -36,12 +36,15 @@
     <ClCompile Include="Review.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Admin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="User.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="System.h">
+    <ClInclude Include="NotinOOP.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Customer.h">
@@ -54,6 +57,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Review.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Admin.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
