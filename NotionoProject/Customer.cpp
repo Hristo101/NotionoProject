@@ -51,6 +51,7 @@ void Customer::removeFromCart(const string& fragranceName)
 
 void Customer::viewCart() const
 {
+	cart.view();
 }
 
 void Customer::viewBought() const
