@@ -18,6 +18,7 @@ class Fragrance
 		vector<Review> reviews;
     public:
 		double getRating() const;
+		const string& toString() const;
 		const string& getName() const;
 		int getFragranceId() const;
 		double getPrice() const;

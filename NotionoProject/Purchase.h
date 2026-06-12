@@ -18,6 +18,7 @@ public:
 
     unsigned getPurchaseId() const;
     Condition getCondition() const;
+	const string& toString() const;
     void setCondition(Condition newCond);
     int getUserId() const;
 };

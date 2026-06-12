@@ -29,6 +29,7 @@ double Cart::getTotalPrice() const
 	{
 		total += fragrance->getPrice();
 	}
+
 	return total;
 }
 void Cart::view() const

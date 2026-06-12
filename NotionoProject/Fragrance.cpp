@@ -1,6 +1,11 @@
 #include "Fragrance.h"
 unsigned Fragrance::fragranceIdCounter = 1;
 
+double Fragrance::getRating() const
+{
+	
+}
+
 const string& Fragrance::getName() const
 {
 	return this->name;

@@ -29,4 +29,16 @@ public:
     void removeReview(int fragranceId, int reviewId);
     void logout();
     void deliver(int purchaseId);
+    void handleAddToBalance(double amount);
+    void handleAddToWishlist(const string& fragranceName);
+    void handleRemoveFromWishlist(const string& fragranceName);
+    void handleAddToCart(const string& fragranceName);
+    void handleRemoveFromCart(const string& fragranceName);
+    void handleViewCart() const;
+    void handleViewBought() const;
+    void handleViewPurchases() const;
+    void handleRecommend() const;
+    void handleCheckout();
+    void handleCancel(unsigned purchaseId);
+    void handleMakeReview(const string& fragranceName, unsigned rating, const string& comment);
 };

@@ -123,3 +123,191 @@ void NotinOOP::deliver(int purchaseId) {
     }
     throw invalid_argument("Invalid purchaseId");
 }
+
+void NotinOOP::handleAddToBalance(double amount)
+{
+    Customer* client = dynamic_cast<Customer*>(currentUser);
+    if (!client) {
+        cout << "Грешка: Само клиенти могат да пълнят количка!\n";
+        return;
+    }
+
+	client->addToBalance(amount);
+}
+
+void NotinOOP::handleAddToWishlist(const string& fragranceName)
+{
+    Customer* client = dynamic_cast<Customer*>(currentUser);
+    if (!client) {
+        cout << "Грешка: Само клиенти могат да пълнят количка!\n";
+        return;
+    }
+
+    for (const auto& f : this->fragrances) {
+        if (f.getName() == fragranceName) {
+            client->addToWishlist(&f);
+            cout << "Успешно добавен в количката ви.\n";
+            return;
+        }
+    }
+}
+
+void NotinOOP::handleRemoveFromWishlist(const string& fragranceName)
+{
+    Customer* client = dynamic_cast<Customer*>(currentUser);
+    if (!client) {
+        cout << "Грешка: Само клиенти могат да пълнят количка!\n";
+        return;
+    }
+    
+    client->removeFromWishlist(fragranceName);
+}
+
+void NotinOOP::handleAddToCart(const string& fragranceName)
+{
+    Customer* client = dynamic_cast<Customer*>(currentUser);
+    if (!client) {
+        cout << "Грешка: Само клиенти могат да пълнят количка!\n";
+        return;
+    }
+
+    for (const auto& f : this->fragrances) {
+        if (f.getName() == fragranceName) {
+            client->addToCart(&f);
+            cout << "Успешно добавен в количката ви.\n";
+            return;
+        }
+    }
+}
+
+void NotinOOP::handleRemoveFromCart(const string& fragranceName)
+{
+    Customer* client = dynamic_cast<Customer*>(currentUser);
+    if (!client) {
+        cout << "Грешка: Само клиенти могат да пълнят количка!\n";
+        return;
+    }
+
+	client->removeFromCart(fragranceName);
+}
+
+void NotinOOP::handleViewCart() const
+{
+    Customer* client = dynamic_cast<Customer*>(currentUser);
+    if (!client) {
+        cout << "Грешка: Само клиенти могат да пълнят количка!\n";
+        return;
+    }
+
+	client->viewCart();
+}
+
+void NotinOOP::handleViewBought() const
+{
+    Customer* client = dynamic_cast<Customer*>(currentUser);
+    if (!client) {
+        cout << "Грешка: Само клиенти могат да пълнят количка!\n";
+        return;
+    }
+
+	client->viewBought();
+}
+
+void NotinOOP::handleViewPurchases() const
+{
+    Customer* client = dynamic_cast<Customer*>(currentUser);
+    if (!client) {
+        cout << "Грешка: Само клиенти могат да пълнят количка!\n";
+        return;
+    }
+
+    client->viewPurchases();
+}
+
+void NotinOOP::handleRecommend() const
+{
+    Customer* client = dynamic_cast<Customer*>(currentUser);
+    if (!client) {
+        cout << "Грешка: Само клиенти могат да пълнят количка!\n";
+        return;
+    }
+
+	client->recommend(this->fragrances);
+}
+
+void NotinOOP::handleCheckout()
+{
+    Customer* client = dynamic_cast<Customer*>(currentUser);
+    if (!client) {
+        cout << "Грешка: Само клиенти могат да пълнят количка!\n";
+        return;
+    }
+
+    vector<const Fragrance*> cartItems = client->getCart().getItems();
+
+    if (cartItems.empty()) {
+        cout << "Грешка: Количката ви е празна!\n";
+        return;
+    }
+
+    vector<Fragrance> fragrancesToBuy;
+
+    for (const auto* itemPtr : cartItems) {
+        fragrancesToBuy.push_back(*itemPtr);
+    }
+
+	double finalPrice = client->getCart().getTotalPrice();
+	double bestPrice = finalPrice;
+	int bestDiscountIndex = -1;
+	vector<unique_ptr<Discount>> discounts = client->getDiscounts();
+
+    for (int i = 0; i < discounts.size(); i++)
+    {
+		double priceWithDiscount = discounts[i]->apply(cartItems);
+
+        if (priceWithDiscount < bestPrice)
+        {
+            bestPrice = priceWithDiscount;
+			bestDiscountIndex = i;
+        }
+    }
+
+    try {
+        client->checkout(bestPrice); 
+    }
+    catch (const std::exception& e) {
+        cout << e.what() << "\n"; 
+        return;
+    }
+
+    if (bestDiscountIndex != -1)
+    {
+        discounts.erase(discounts.begin() + bestDiscountIndex);
+    }
+
+    Purchase newPurshase(fragrancesToBuy,client->getUserId());
+
+	this->purchases.push_back(newPurshase);
+	client->getPurchases().push_back(newPurshase);
+}
+
+void NotinOOP::handleCancel(unsigned purchaseId)
+{
+    Customer* client = dynamic_cast<Customer*>(currentUser);
+    if (!client) {
+        cout << "Грешка: Само клиенти могат да пълнят количка!\n";
+        return;
+    }
+
+}
+
+void NotinOOP::handleMakeReview(const string& fragranceName, unsigned rating, const string& comment)
+{
+    Customer* client = dynamic_cast<Customer*>(currentUser);
+    if (!client) {
+        cout << "Грешка: Само клиенти могат да пълнят количка!\n";
+        return;
+    }
+
+    
+}
