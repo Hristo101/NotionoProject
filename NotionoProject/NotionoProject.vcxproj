@@ -125,6 +125,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Admin.cpp" />
+    <ClCompile Include="BonusDiscount.cpp" />
+    <ClCompile Include="BrandDiscount.cpp" />
+    <ClCompile Include="Cart.cpp" />
     <ClCompile Include="Condition.h" />
     <ClCompile Include="Customer.cpp" />
     <ClCompile Include="Discount.cpp" />
@@ -137,6 +140,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Admin.h" />
+    <ClInclude Include="BonusDiscount.h" />
+    <ClInclude Include="BrandDiscount.h" />
+    <ClInclude Include="Cart.h" />
     <ClInclude Include="Customer.h" />
     <ClInclude Include="Discount.h" />
     <ClInclude Include="Fragrance.h" />

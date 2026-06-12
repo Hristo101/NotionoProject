@@ -20,6 +20,8 @@ class Fragrance
 		double getRating() const;
 		const string& getName() const;
 		int getFragranceId() const;
+		double getPrice() const;
+		const string& getBrand() const;
 		vector<Review>& getReviews();
 		void setQuantity(int qantity);
 		Fragrance(const string& name, const string& brand, double price, const string& fragranceFamily, int quantity);

@@ -11,6 +11,16 @@ int Fragrance::getFragranceId() const
 	return this->fragranceId;
 }
 
+double Fragrance::getPrice() const
+{
+	return this->price;
+}
+
+const string& Fragrance::getBrand() const
+{
+	return this->brand;
+}
+
 vector<Review>& Fragrance::getReviews()
 {
 	return this->reviews;
