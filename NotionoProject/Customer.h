@@ -1,11 +1,14 @@
 #pragma once
 #include "User.h"
+#include <string>
+#include <memory>
+
 class Customer : public User
 {
-    private:
+public:
+    Customer(const std::string& userName, const std::string& password, std::shared_ptr<NotinOOP> sys)
+        : User(userName, password, sys) {
+    }
 
-    public:
-    Customer(const string& userName, const string& password) : User(userName, password) {};
-	void help() const override;
+    void help() const override;
 };
-

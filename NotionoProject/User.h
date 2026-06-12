@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <memory>
 using namespace std;
 #include <exception>
 class NotinOOP;
@@ -20,6 +21,7 @@ class User
 		virtual void help() const = 0;
 		const string& getUserName() const;
 		const string& getUserPassword() const;
+		int getUserId() const;
 
 };
 

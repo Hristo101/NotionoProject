@@ -15,3 +15,6 @@ const string& User::getUserPassword() const
 {
 	return this->password;
 }
+int User::getUserId() const {
+	return this->userId;
+}

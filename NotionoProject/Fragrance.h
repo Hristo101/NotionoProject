@@ -19,6 +19,8 @@ class Fragrance
     public:
 		double getRating() const;
 		const string& getName() const;
+		int getFragranceId() const;
+		vector<Review>& getReviews();
 		void setQuantity(int qantity);
 		Fragrance(const string& name, const string& brand, double price, const string& fragranceFamily, int quantity);
 };

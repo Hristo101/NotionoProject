@@ -1,5 +1,7 @@
-#include "Admin.h"
 #include "NotinOOP.h"
+#include "User.h"   
+#include "Admin.h"  
+#include "Customer.h"
 
 Admin::Admin(const std::string& userName, const std::string& password, std::shared_ptr<NotinOOP> sys) : User(userName,password,sys)
 {
