@@ -9,7 +9,7 @@ class Review
 		string comment;
 		unsigned rating;
     public:
-		Review(int userId, const string& comment, unsigned rating) : reviewId(reviewIdCounter++) {};
+		Review(int userId, const string& comment, unsigned rating);
 		int getUserId() const;
 		int getReviewId() const;
 };

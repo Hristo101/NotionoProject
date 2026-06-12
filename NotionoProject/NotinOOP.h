@@ -26,4 +26,5 @@ public:
     void addFragranceQuantity(const string& fragranceName, int quantity);
     void removeReview(int fragranceId, int reviewId);
     void logout();
+    void deliver(int purchaseId);
 };
