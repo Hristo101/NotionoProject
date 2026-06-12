@@ -113,3 +113,13 @@ void NotinOOP::removeReview(int fragranceId, int reviewId) {
 
     throw logic_error("No such review was found for this perfume.");
 };
+
+void NotinOOP::deliver(int purchaseId) {
+    for (auto& p : purchases) {
+        if (p.getPurchaseId() == purchaseId) {
+            p.setCondition(Condition::DELIVERED);
+            return;
+        }
+    }
+    throw invalid_argument("Invalid purchaseId");
+}

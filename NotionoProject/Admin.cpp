@@ -56,8 +56,24 @@ void Admin::addQuantity(const std::string& fragranceName, int quantity)
 
 void Admin::deliver(int purchaseId)
 {
+    if (std::shared_ptr<NotinOOP> sys = systemRef.lock())
+    {
+        sys->deliver(purchaseId);
+    }
+    else
+    {
+        std::cout << "Грешка: Главната система не е достъпна в паметта!\n";
+    }
 }
 
 void Admin::removeReview(int fragranceId, int reviewId)
 {
+    if (std::shared_ptr<NotinOOP> sys = systemRef.lock())
+    {
+        sys->removeReview(fragranceId, reviewId);
+    }
+    else
+    {
+        std::cout << "Грешка: Главната система не е достъпна в паметта!\n";
+    }
 }

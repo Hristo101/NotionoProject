@@ -5,6 +5,7 @@
 #include <memory>
 #include <map>
 #include "Fragrance.h"
+#include "Purchase.h"
 
 using namespace std;
 
@@ -15,6 +16,7 @@ class NotinOOP : public std::enable_shared_from_this<NotinOOP>
 private:
     vector<unique_ptr<User>> users;
     vector<Fragrance> fragrances;
+	vector<Purchase> purchases;
     User* currentUser;
     map<int, int> deletedReviewsCounter;
 public:
