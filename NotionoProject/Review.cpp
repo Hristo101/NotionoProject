@@ -14,3 +14,7 @@ int Review::getReviewId() const
 {
 	return this->reviewId;
 }
+int Review::getRating() const
+{
+	return this->rating;
+}

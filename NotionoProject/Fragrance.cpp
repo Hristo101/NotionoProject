@@ -3,7 +3,16 @@ unsigned Fragrance::fragranceIdCounter = 1;
 
 double Fragrance::getRating() const
 {
-	
+	int size = this->reviews.size();
+
+	double rating = 0.0;
+
+	for (int i = 0; i < size; i++)
+	{
+		rating = this->reviews[i].getRating();
+	}
+
+	return rating / size;
 }
 
 const string& Fragrance::getName() const

@@ -12,5 +12,6 @@ class Review
 		Review(int userId, const string& comment, unsigned rating);
 		int getUserId() const;
 		int getReviewId() const;
+		int getRating() const;
 };
 
