@@ -2,7 +2,14 @@
 
 void Purchase::show() const
 {
-
+    double totalPrice = 0.0;
+    cout << "Purchase ID: " << this->purchaseId << ", Condition: " << getConditionString() << ", User ID: " << this->userId << endl;
+    for (int i = 0; i < this->fragrances.size(); i++)
+    {
+        cout << this->fragrances[i].toString() << endl;
+        totalPrice += this->fragrances[i].getPrice();
+    }
+    cout << totalPrice << endl;
 }
 
 unsigned Purchase::getPurchaseId() const
@@ -15,12 +22,18 @@ Condition Purchase::getCondition() const
     return this->condition;
 }
 
-const string& Purchase::toString() const
+const string Purchase::getConditionString() const
 {
-	double totalPrice = 0.0;
-    for (int i = 0; i < this->fragrances.size(); i++)
+    switch (this->condition)
     {
-		totalPrice += this->fragrances[i].getPrice();
+    case Condition::PENDING:
+        return "Pending";
+    case Condition::DELIVERED:
+        return "Delivered";
+    case Condition::CANCELED:
+        return "Canceled";
+    default:
+        return "Unknown";
     }
 }
 

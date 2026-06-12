@@ -35,6 +35,17 @@ void Customer::addToCart(const std::string& fragranceName)
 	cart.add();
 }
 
+void Customer::viewBought() const
+{
+    for (int i = 0; i < this->purchases.size(); i++)
+    {
+        if (this->purchases[i].getCondition() == Condition::DELIVERED)
+        {
+            cout << this->purchases[i].toString();
+        }
+    }
+}
+
 void Customer::viewPurchases() const
 {
 

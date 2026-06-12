@@ -39,3 +39,10 @@ void Fragrance::setQuantity(int qantity)
 Fragrance::Fragrance(const string& name, const string& brand, double price, const string& fragranceFamily, int quantity) : fragranceId(fragranceIdCounter++)
 {
 }
+
+const string& Fragrance::toString() const
+{
+	double rating = this->getRating();
+	string result = "Fragrance: " + this->name + ", Brand: " + this->brand + ", Price: " + to_string(this->price) + ", Rating: " + to_string(rating);
+	return result;
+}
