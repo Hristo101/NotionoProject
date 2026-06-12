@@ -21,34 +21,72 @@ void Customer::addToBalance(double amount)
 	this->balance += amount;
 }
 
-void Customer::addToWishlist(const std::string& fragranceName)
+void Customer::addToWishlist(const Fragrance* f)
 {
-
+	this->favoriteFragrances.push_back(f);
 }
+
 
 void Customer::removeFromWishlist(const std::string& fragranceName)
 {
+    for (int i = 0; i < this->favoriteFragrances.size(); i++)
+    {
+        if (this->favoriteFragrances[i]->getName() == fragranceName)
+        {
+            this->favoriteFragrances.erase(this->favoriteFragrances.begin() + i);
+        }
+    }
 }
 
-void Customer::addToCart(const std::string& fragranceName)
+void Customer::addToCart(const Fragrance* f)
 {
-	cart.add();
+	cart.add(f);
+}
+
+void Customer::removeFromCart(const string& fragranceName)
+{
+	cart.remove(fragranceName);
+}
+
+
+void Customer::viewCart() const
+{
 }
 
 void Customer::viewBought() const
 {
+    bool hasBought = false;
+
     for (int i = 0; i < this->purchases.size(); i++)
     {
         if (this->purchases[i].getCondition() == Condition::DELIVERED)
         {
-            cout << this->purchases[i].toString();
+            this->purchases[i].show();
+            hasBought = true;
         }
+    }
+
+    if (!hasBought)
+    {
+        std::cout << "Нямате закупени продукти." << std::endl;
     }
 }
 
 void Customer::viewPurchases() const
 {
+    if (this->purchases.empty()) {
+        std::cout << "Нямате направени поръчки.\n";
+        return;
+    }
 
+    for (size_t i = 0; i < this->purchases.size(); i++)
+    {
+        this->purchases[i].show(); 
+    }
+}
+
+void Customer::recommend(const vector<Fragrance>& allFragrances) const
+{
 }
 
 void Customer::checkout(double finalPrice) {
@@ -59,4 +97,31 @@ void Customer::checkout(double finalPrice) {
     this->balance -= finalPrice;
 
     this->cart.clear();
+}
+
+void Customer::cancelPurchase(unsigned purchaseId)
+{
+    for (int i = 0; i < this->purchases.size(); i++)
+    {
+        if (this->purchases[i].getPurchaseId() == purchaseId)
+        {
+            if (this->purchases[i].getCondition() == Condition::PENDING)
+            {
+                this->purchases[i].setCondition(Condition::CANCELED);
+            }
+
+		    double returnAmount = 0.0;
+
+            for (const auto& fragrance : this->purchases[i].getFragrances())
+            {
+                returnAmount += fragrance.getPrice();
+            }
+            this->balance += returnAmount;
+			return;
+        }
+    }
+}
+
+void Customer::addReviewToHistory(unsigned reviewId)
+{
 }

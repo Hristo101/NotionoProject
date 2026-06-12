@@ -17,6 +17,7 @@ public:
     void show() const;
 
     unsigned getPurchaseId() const;
+    const vector<Fragrance> getFragrances() const;
     Condition getCondition() const;
 	const string getConditionString() const;
     void setCondition(Condition newCond);

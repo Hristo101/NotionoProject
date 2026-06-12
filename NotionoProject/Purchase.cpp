@@ -17,6 +17,11 @@ unsigned Purchase::getPurchaseId() const
     return this->purchaseId;
 }
 
+const vector<Fragrance> Purchase::getFragrances() const
+{
+	return this->fragrances;
+}
+
 Condition Purchase::getCondition() const
 {
     return this->condition;

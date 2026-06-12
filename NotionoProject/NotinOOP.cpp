@@ -299,6 +299,7 @@ void NotinOOP::handleCancel(unsigned purchaseId)
         return;
     }
 
+	client->cancelPurchase(purchaseId);
 }
 
 void NotinOOP::handleMakeReview(const string& fragranceName, unsigned rating, const string& comment)
