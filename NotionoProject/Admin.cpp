@@ -9,6 +9,17 @@ Admin::Admin(const std::string& userName, const std::string& password, std::shar
 
 void Admin::help() const
 {
+    std::cout << "Достъпни команди за управление на магазина:\n\n";
+
+    std::cout << "--- КАТАЛОГ И НАЛИЧНОСТИ ---\n";
+    std::cout << " * create-fragrance <име> <марка> <цена> <нотка> - Създава нов парфюм в каталога на магазина.\n";
+    std::cout << " * add-quantity <име> <брой> - Добавя наличност към вече съществуващ парфюм.\n";
+
+    std::cout << "--- ПОРЪЧКИ И МОДЕРАЦИЯ ---\n";
+    std::cout << " * deliver <purchaseId> - Променя статуса на чакаща поръчка на 'Доставена'.\n";
+    std::cout << " * remove-review <fragranceId> <reviewId> Изтрива неподходящо ревю и трупа наказания на автора му.\n";
+    std::cout << " * block-user <username> - Ръчно блокира/изтрива потребител от системата.\n";
+    std::cout << " * logout - Излизане от администраторския панел.\n";
 }
 
 void Admin::blockUser(const string& username)

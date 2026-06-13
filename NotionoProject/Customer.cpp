@@ -19,7 +19,28 @@ vector<Purchase>& Customer::getPurchases()
 }
 void Customer::help() const
 {
-    std::cout << "Това е помощното меню за Клиенти (Customers)." << std::endl;
+    std::cout << "Достъпни команди:\n\n";
+
+    std::cout << "--- ПАРИ И ПЛАЩАНИЯ ---\n";
+    std::cout << " * add-to-balance <сума> - Зарежда пари в профила ви.\n";
+    std::cout << " * checkout - Плаща всички продукти в количката.\n\n";
+
+    std::cout << "--- КОЛИЧКА И ЖЕЛАНИ ---\n";
+    std::cout << " * add-to-cart <име> - Добавя парфюм в количката.\n";
+    std::cout << " * remove-from-cart <име> - Премахва парфюм от количката.\n";
+    std::cout << " * view-cart - Показва съдържанието на количката.\n";
+    std::cout << " * add-to-wishlist <име>  - Добавя парфюм в 'Любими'.\n";
+    std::cout << " * remove-from-wishlist <име>  - Премахва парфюм от 'Любими'.\n\n";
+
+    std::cout << "--- ПОРЪЧКИ И РЕВЮТА ---\n";
+    std::cout << " * view-purchases  - Показва всички ваши поръчки (статус).\n";
+    std::cout << " * view-bought - Показва само ДОСТАВЕНИТЕ ви поръчки.\n";
+    std::cout << " * cancel-purchase <id> - Отказва чакаща поръчка и връща парите.\n";
+    std::cout << " * make-review <име> <1-5> <текст> - Оставя ревю за даден парфюм.\n\n";
+
+    std::cout << "--- ДРУГИ ---\n";
+    std::cout << " * recommend   - Препоръчва парфюми на база 'Любими'.\n";
+    std::cout << " * logout - Излизане от профила.\n";
 }
 
 void Customer::addToBalance(double amount)
