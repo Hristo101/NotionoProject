@@ -125,42 +125,66 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AddQuantityCommand.cpp" />
+    <ClCompile Include="AddToBalanceCommand.cpp" />
+    <ClCompile Include="AddToCartCommand.cpp" />
+    <ClCompile Include="AddToWishlistCommand.cpp" />
     <ClCompile Include="Admin.cpp" />
     <ClCompile Include="BlockUserCommand.cpp" />
     <ClCompile Include="BonusDiscount.cpp" />
     <ClCompile Include="BrandDiscount.cpp" />
+    <ClCompile Include="CancelPurchaseCommand.cpp" />
     <ClCompile Include="Cart.cpp" />
+    <ClCompile Include="CheckoutCommand.cpp" />
     <ClCompile Include="Condition.h" />
     <ClCompile Include="CreateFragranceCommand.cpp" />
     <ClCompile Include="Customer.cpp" />
     <ClCompile Include="DeliverCommand.cpp" />
     <ClCompile Include="Discount.cpp" />
     <ClCompile Include="Fragrance.cpp" />
+    <ClCompile Include="MakeReviewCommand.cpp" />
     <ClCompile Include="NotionoProject.cpp" />
     <ClCompile Include="Purchase.cpp" />
+    <ClCompile Include="RecommendCommand.cpp" />
+    <ClCompile Include="RemoveFromCartCommand.cpp" />
+    <ClCompile Include="RemoveFromWishlistCommand.cpp" />
     <ClCompile Include="RemoveReviewCommand.cpp" />
     <ClCompile Include="Review.cpp" />
     <ClCompile Include="NotinOOP.cpp" />
     <ClCompile Include="User.cpp" />
+    <ClCompile Include="ViewBoughtCommand.cpp" />
+    <ClCompile Include="ViewCartCommand.cpp" />
+    <ClCompile Include="ViewPurchasesCommand.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AddQuantityCommand.h" />
+    <ClInclude Include="AddToBalanceCommand.h" />
+    <ClInclude Include="AddToCartCommand.h" />
+    <ClInclude Include="AddToWishlistCommand.h" />
     <ClInclude Include="Admin.h" />
     <ClInclude Include="BlockUserCommand.h" />
     <ClInclude Include="BonusDiscount.h" />
     <ClInclude Include="BrandDiscount.h" />
+    <ClInclude Include="CancelPurchaseCommand.h" />
     <ClInclude Include="Cart.h" />
+    <ClInclude Include="CheckoutCommand.h" />
     <ClInclude Include="CreateFragranceCommand.h" />
     <ClInclude Include="Customer.h" />
     <ClInclude Include="DeliverCommand.h" />
     <ClInclude Include="Discount.h" />
     <ClInclude Include="Fragrance.h" />
     <ClInclude Include="IComand.h" />
+    <ClInclude Include="MakeReviewCommand.h" />
     <ClInclude Include="Purchase.h" />
+    <ClInclude Include="RecommendCommand.h" />
+    <ClInclude Include="RemoveFromCartCommand.h" />
+    <ClInclude Include="RemoveFromWishlistCommand.h" />
     <ClInclude Include="RemoveReviewCommand.h" />
     <ClInclude Include="Review.h" />
     <ClInclude Include="NotinOOP.h" />
     <ClInclude Include="User.h" />
+    <ClInclude Include="ViewBoughtCommand.h" />
+    <ClInclude Include="ViewCartCommand.h" />
+    <ClInclude Include="ViewPurchasesCommand.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
