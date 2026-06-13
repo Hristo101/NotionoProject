@@ -49,3 +49,13 @@ void Purchase::setCondition(Condition newCond)
 int Purchase::getUserId() const {
     return this->userId;
 }
+Purchase::Purchase(const vector<Fragrance>& fragrances, int userId) : purchaseId(purchaseIdCounter++)
+{
+    if (fragrances.empty()) {
+        throw logic_error("Грешка: Не може да се създаде поръчка с празна количка!");
+    }
+
+    this->userId = userId;
+    this->fragrances = fragrances;
+    this->condition = Condition::PENDING; 
+}

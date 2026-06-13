@@ -3,7 +3,7 @@
 #include "Admin.h"  
 #include "Customer.h"
 
-void NotinOOP::registerUser(const string& username, const string& password, const string& role) {
+void NotinOOP::registerUser(const string& username, const string& password, const string& role, shared_ptr<NotinOOP> sysPtr) {
     for (const auto& u : this->users) {
         if (u->getUserName() == username) {
             cout << "Грешка: Потребителското име вече е заето!\n";
@@ -11,8 +11,6 @@ void NotinOOP::registerUser(const string& username, const string& password, cons
         }
     }
 
-
-    auto sysPtr = this->shared_from_this();
 
     if (role == "admin") {
         this->users.push_back(make_unique<Admin>(username, password, sysPtr));
@@ -79,49 +77,78 @@ void NotinOOP::addFragranceQuantity(const string& fragranceName, int quantity)
     throw invalid_argument("Invalid fragranceName");
 }
 
-void NotinOOP::removeReview(int fragranceId, int reviewId) {
-    for (int i = 0; i < this->fragrances.size(); i++)
+void NotinOOP::removeReview(int fragranceId, int reviewId)
+{
+
+    for (size_t i = 0; i < this->fragrances.size(); i++)
     {
         if (this->fragrances[i].getFragranceId() == fragranceId)
         {
-            for (int j = 0; j < this->fragrances[i].getReviews().size(); j++)
+            auto& reviewsList = this->fragrances[i].getReviews();
+
+            for (size_t j = 0; j < reviewsList.size(); j++)
             {
-                if (this->fragrances[i].getReviews()[j].getReviewId() == reviewId)
+                if (reviewsList[j].getReviewId() == reviewId)
                 {
-                    if (deletedReviewsCounter.contains(this->fragrances[i].getReviews()[j].getUserId()))
+                    int offenderId = reviewsList[j].getUserId();
+
+                    deletedReviewsCounter[offenderId]++;
+
+                    if (deletedReviewsCounter[offenderId] == 7)
                     {
-                        deletedReviewsCounter[this->fragrances[i].getReviews()[j].getUserId()]++;
-                        if (deletedReviewsCounter[this->fragrances[i].getReviews()[j].getUserId()] == 7)
+                        for (size_t k = 0; k < this->users.size(); k++)
                         {
-                            for (int k = 0; k < this->users.size(); k++)
+                            if (this->users[k]->getUserId() == offenderId)
                             {
-                                if (this->users[k]->getUserId() == this->fragrances[i].getReviews()[j].getUserId())
-                                {
-                                    this->blockUser(this->users[k]->getUserName());
-                                }
+                                this->blockUser(this->users[k]->getUserName());
+                                break;
                             }
                         }
                     }
+
+                    reviewsList.erase(reviewsList.begin() + j);
+
+                    return;
                 }
-
-                this->fragrances[i].getReviews().erase(this->fragrances[i].getReviews().begin() + j);
-
-                return;
             }
         }
     }
 
-    throw logic_error("No such review was found for this perfume.");
-};
+    throw std::logic_error("No such review was found for this perfume.");
+}
 
 void NotinOOP::deliver(int purchaseId) {
+    int userId = -1;
+
     for (auto& p : purchases) {
         if (p.getPurchaseId() == purchaseId) {
-            p.setCondition(Condition::DELIVERED);
-            return;
+            if (p.getCondition() == Condition::PENDING)
+            {
+              p.setCondition(Condition::DELIVERED);
+              userId = p.getUserId();
+              return;
+            }
         }
     }
-    throw invalid_argument("Invalid purchaseId");
+
+    for (auto& u : users)
+    {
+        if (u->getUserId() == userId)
+        {
+            Customer* client = dynamic_cast<Customer*>(u.get());
+            if (client)
+            {
+                for (auto& clientPurchase : client->getPurchases())
+                {
+                    if (clientPurchase.getPurchaseId() == purchaseId)
+                    {
+                        clientPurchase.setCondition(Condition::DELIVERED);
+                        return;
+                    }
+                }
+            }
+        }
+    }
 }
 
 void NotinOOP::handleAddToBalance(double amount)
@@ -259,7 +286,7 @@ void NotinOOP::handleCheckout()
 	double finalPrice = client->getCart().getTotalPrice();
 	double bestPrice = finalPrice;
 	int bestDiscountIndex = -1;
-	vector<unique_ptr<Discount>> discounts = client->getDiscounts();
+	vector<unique_ptr<Discount>>& discounts = client->getDiscounts();
 
     for (int i = 0; i < discounts.size(); i++)
     {
@@ -300,15 +327,32 @@ void NotinOOP::handleCancel(unsigned purchaseId)
     }
 
 	client->cancelPurchase(purchaseId);
+
+    for (auto& p : this->purchases) {
+        if (p.getPurchaseId() == purchaseId) {
+            p.setCondition(Condition::CANCELED);
+            break;
+        }
+    }
 }
 
 void NotinOOP::handleMakeReview(const string& fragranceName, unsigned rating, const string& comment)
 {
     Customer* client = dynamic_cast<Customer*>(currentUser);
     if (!client) {
-        cout << "Грешка: Само клиенти могат да пълнят количка!\n";
+        cout << "Грешка: Само логнати клиенти могат да оставят ревюта!\n";
         return;
     }
 
-    
+    Fragrance* targetFragrance = nullptr;
+    for (auto& f : this->fragrances) {
+        if (f.getName() == fragranceName) {
+            targetFragrance = &f;
+            break;
+        }
+    }
+
+    Review newReview(client->getUserId(), comment,rating);
+
+    targetFragrance->getReviews().push_back(newReview);
 }

@@ -15,9 +15,7 @@ class Customer : public User
 		vector<unique_ptr<Discount>> discounts;
 		double balance;
     public:
-        Customer(const std::string& userName, const std::string& password, std::shared_ptr<NotinOOP> sys)
-            : User(userName, password, sys) {
-        }
+        Customer(const std::string& userName, const std::string& password, std::shared_ptr<NotinOOP> sys);
 
         const Cart& getCart() const;
         vector<unique_ptr<Discount>>& getDiscounts();
@@ -40,5 +38,4 @@ class Customer : public User
         void checkout(double finalPrice);
 
         void cancelPurchase(unsigned purchaseId);
-        void addReviewToHistory(unsigned reviewId);
 };

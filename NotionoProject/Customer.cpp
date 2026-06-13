@@ -1,6 +1,10 @@
 #include "Customer.h"
 #include <map>
 #include <algorithm>
+Customer::Customer(const std::string& userName, const std::string& password, std::shared_ptr<NotinOOP> sys) : User(userName,password,sys)
+{
+    this->balance = 0.0;
+}
 const Cart& Customer::getCart() const
 {
     return this->cart;
@@ -167,8 +171,4 @@ void Customer::cancelPurchase(unsigned purchaseId)
 			return;
         }
     }
-}
-
-void Customer::addReviewToHistory(unsigned reviewId)
-{
 }
