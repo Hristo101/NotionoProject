@@ -45,7 +45,17 @@ void NotinOOP::logout()
     currentUser = nullptr;
 }
 
+User* NotinOOP::getCurrentUser() const
+{
+    return this->currentUser;
+}
+
 void NotinOOP::blockUser(const string& username) {
+    Admin* admin = dynamic_cast<Admin*>(this->currentUser);
+    if (!admin) {
+        throw logic_error("Отказ: Само администратори могат да зареждат наличност!");
+    }
+
     for (size_t i = 0; i < this->users.size(); i++)
     {
         if (this->users[i]->getUserName() == username)
@@ -58,6 +68,11 @@ void NotinOOP::blockUser(const string& username) {
 }
 
 void NotinOOP::createFragrance(const string& name, const string& brand, double price, const string& fragranceFamily) {
+    Admin* admin = dynamic_cast<Admin*>(this->currentUser);
+    if (!admin) {
+        throw logic_error("Отказ: Само администратори могат да зареждат наличност!");
+    }
+
     for (const auto& f : fragrances) {
         if (f.getName() == name) {
             throw invalid_argument("This fragrance already exists");
@@ -68,6 +83,11 @@ void NotinOOP::createFragrance(const string& name, const string& brand, double p
 
 void NotinOOP::addFragranceQuantity(const string& fragranceName, int quantity)
 {
+    Admin* admin = dynamic_cast<Admin*>(this->currentUser);
+    if (!admin) {
+        throw logic_error("Отказ: Само администратори могат да зареждат наличност!");
+    }
+
     for (auto& f : fragrances) {
         if (f.getName() == fragranceName) {
             f.setQuantity(quantity);
@@ -79,6 +99,10 @@ void NotinOOP::addFragranceQuantity(const string& fragranceName, int quantity)
 
 void NotinOOP::removeReview(int fragranceId, int reviewId)
 {
+    Admin* admin = dynamic_cast<Admin*>(this->currentUser);
+    if (!admin) {
+        throw logic_error("Отказ: Само администратори могат да зареждат наличност!");
+    }
 
     for (size_t i = 0; i < this->fragrances.size(); i++)
     {
@@ -118,6 +142,12 @@ void NotinOOP::removeReview(int fragranceId, int reviewId)
 }
 
 void NotinOOP::deliver(int purchaseId) {
+
+    Admin* admin = dynamic_cast<Admin*>(this->currentUser);
+    if (!admin) {
+        throw logic_error("Отказ: Само администратори могат да зареждат наличност!");
+    }
+
     int userId = -1;
 
     for (auto& p : purchases) {
@@ -126,7 +156,7 @@ void NotinOOP::deliver(int purchaseId) {
             {
               p.setCondition(Condition::DELIVERED);
               userId = p.getUserId();
-              return;
+              break;
             }
         }
     }
@@ -350,6 +380,10 @@ void NotinOOP::handleMakeReview(const string& fragranceName, unsigned rating, co
             targetFragrance = &f;
             break;
         }
+    }
+
+    if (!targetFragrance) {
+        throw invalid_argument("Отказ: Парфюм с такова име не съществува!");
     }
 
     Review newReview(client->getUserId(), comment,rating);

@@ -28,6 +28,7 @@ public:
     void addFragranceQuantity(const string& fragranceName, int quantity);
     void removeReview(int fragranceId, int reviewId);
     void logout();
+    User* getCurrentUser() const;
     void deliver(int purchaseId);
     void handleAddToBalance(double amount);
     void handleAddToWishlist(const string& fragranceName);
