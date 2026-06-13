@@ -19,6 +19,7 @@ class Fragrance
     public:
 		double getRating() const;
 		const string& toString() const;
+		const string& getFragranceFamily() const;
 		const string& getName() const;
 		int getFragranceId() const;
 		double getPrice() const;

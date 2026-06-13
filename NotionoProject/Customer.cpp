@@ -1,4 +1,6 @@
 #include "Customer.h"
+#include <map>
+#include <algorithm>
 const Cart& Customer::getCart() const
 {
     return this->cart;
@@ -88,6 +90,50 @@ void Customer::viewPurchases() const
 
 void Customer::recommend(const vector<Fragrance>& allFragrances) const
 {
+	map<string, int> fragranceFamilyCounter;
+
+    for (int i = 0; i < this->favoriteFragrances.size(); i++)
+    {
+        if (fragranceFamilyCounter.contains(this->favoriteFragrances[i]->getFragranceFamily()))
+        {
+            fragranceFamilyCounter[this->favoriteFragrances[i]->getFragranceFamily()]++;
+        }
+        else {
+			fragranceFamilyCounter[this->favoriteFragrances[i]->getFragranceFamily()] = 1;
+        }
+    }
+
+	string maxFamily;
+	int maxCount = 0;
+
+    for (const auto& item : fragranceFamilyCounter)
+    {
+        if (maxCount < item.second)
+        {
+            maxFamily = item.first;
+			maxCount = item.second;
+        }
+    }
+
+    int recommendedCount = 0;
+
+    for (size_t i = 0; i < allFragrances.size(); i++)
+    {
+        if (recommendedCount >= 3) {
+            break;
+        }
+
+        if (allFragrances[i].getFragranceFamily() == maxFamily)
+        {
+            auto it = std::find(this->favoriteFragrances.begin(), this->favoriteFragrances.end(), &allFragrances[i]);
+
+            if (it == this->favoriteFragrances.end())
+            {
+                std::cout << " - " << allFragrances[i].toString();
+                recommendedCount++;
+            }
+        }
+    }
 }
 
 void Customer::checkout(double finalPrice) {

@@ -55,3 +55,8 @@ const string& Fragrance::toString() const
 	string result = "Fragrance: " + this->name + ", Brand: " + this->brand + ", Price: " + to_string(this->price) + ", Rating: " + to_string(rating);
 	return result;
 }
+
+const string& Fragrance::getFragranceFamily() const
+{
+	return this->fragranceFamily;
+}
